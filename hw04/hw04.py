@@ -127,18 +127,18 @@ class VendingMachine:
         return f'Current {self.item} stock: {self.stock}' 
     def add_funds(self,Funds):
         if self.stock == 0:
-            return f'Nothing left to vend. Please restock. Here is your ${Funds}'
+            return f'Nothing left to vend. Please restock. Here is your ${Funds}.'
         self.funds = self.funds + Funds
-        return f'Current balance:${self.funds}'
+        return f'Current balance: ${self.funds}'
     def vend(self):
         if self.stock == 0 :
             return f'Nothing left to vend. Please restock.'
         elif self.funds < self.price:
-            return f'You must add ${self.price-self.funds} more funds'
+            return f'You must add ${self.price-self.funds} more funds.'
         else :
             self.stock = self.stock - 1
             change  = self.funds - self.price
             self.funds = 0
             if change !=0:
-              return f'Here is your {self.item} and ${self.funds} change.'
+              return f'Here is your {self.item} and ${change} change.'
             return f'Here is your {self.item}.'
