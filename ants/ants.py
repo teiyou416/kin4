@@ -132,10 +132,19 @@ class Ant(Insect):
     def add_to(self, place):
         if place.ant is None:
             place.ant = self
-        else:
+        else :
             # BEGIN Problem 8
-            assert place.ant is None, 'Two ants in {0}'.format(place)
-            # END Problem 8
+            # END Problem 8 
+            assert (
+                    (place.ant is None)
+                    or self.can_contain(place.ant)
+                    or place.ant.can_contain(self) 
+            ), 'Two ants in {0}'.format(place)
+            if self.is_container and self.can_contain(place.ant):
+                self.store_ant(place.ant)
+                place.ant = self
+            elif place.ant.is_container and place.ant.can_contain(self):
+                place.ant.store_ant(self)
         Insect.add_to(self, place)
 
     def remove_from(self, place):
@@ -326,11 +335,14 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.ant_contained is None and other.is_container is not True :
+            return True
         # END Problem 8
 
     def store_ant(self, ant):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        self.ant_contained = ant
         # END Problem 8
 
     def remove_ant(self, ant):
@@ -351,6 +363,8 @@ class ContainerAnt(Ant):
     def action(self, gamestate):
         # BEGIN Problem 8
         "*** YOUR CODE HERE ***"
+        if self.ant_contained is not None :
+            return self.ant_contained.action(gamestate)
         # END Problem 8
 
 
@@ -362,10 +376,20 @@ class BodyguardAnt(ContainerAnt):
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 8
     implemented = True  # Change to True to view in the GUI
+    def __init__(self,health=2):
+        super().__init__(health)
     # END Problem 8
 
 # BEGIN Problem 9
 # The TankAnt class
+class TankAnt(ContainerAnt):
+    name = 'Tank'
+    food_cost = 6
+    implemented = True
+    def __init__(self,health=2):
+        super().__init__(health)
+    def action(self,gamestate):
+
 # END Problem 9
 
 
