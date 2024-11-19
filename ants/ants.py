@@ -470,10 +470,10 @@ class QueenAnt(ScubaThrower):  # You should change this line
                 if not pos.ant.is_doubled :
                     pos.ant.is_doubled = True
                     pos.ant.double()
-            if pos.ant.is_container and pos.ant.ant_contained is not None :
-                if not pos.ant.ant_contained.is_doubled :
-                    pos.ant.ant_contained.double()
-                    pos.ant.ant_contained.is_doubled = True
+                if pos.ant.is_container and pos.ant.ant_contained is not None :
+                    if not pos.ant.ant_contained.is_doubled :
+                      pos.ant.ant_contained.double()
+                      pos.ant.ant_contained.is_doubled = True
             pos = pos.exit
         # END Problem 12
 
@@ -484,7 +484,7 @@ class QueenAnt(ScubaThrower):  # You should change this line
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
         if amount >= self.health :
-         ants.lose()
+         ants_lose()
     def remove_from(self,place):
         None
                 # END Problem 12
