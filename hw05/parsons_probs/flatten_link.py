@@ -11,8 +11,12 @@ def flatten_link(lnk):
     [1, 2, 3, 4, 5, 6]
     """
     "*** YOUR CODE HERE ***"
-
-
+    if lnk is Link.empty:
+        return []
+    if isinstance(lnk.first,Link):
+        return flatten_link(lnk.first)+flatten_link(lnk.rest)
+    else :
+        return [lnk.first]+flatten_link(lnk.rest)
 class Link:
     empty = ()
 

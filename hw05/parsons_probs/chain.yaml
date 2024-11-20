@@ -1,5 +1,4 @@
 problem_name: chain
-
 problem_description: |
   Returns whether there exists a path in t where all nodes
   share the same label.

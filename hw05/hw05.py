@@ -43,7 +43,12 @@ def has_path(t, term):
     """
     assert len(term) > 0, 'no path for empty term.'
     "*** YOUR CODE HERE ***"
-
+    if t.label != term[0]:
+        return False
+    elif len(term) == 1:
+        return True
+    for b in t.branches:
+        has_path(b,term[1:])
 
 def duplicate_link(lnk, val):
     """Mutates `lnk` such that if there is a linked list
