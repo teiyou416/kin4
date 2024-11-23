@@ -48,8 +48,9 @@ def has_path(t, term):
     elif len(term) == 1:
         return True
     for b in t.branches:
-        has_path(b,term[1:])
-
+        if has_path(b,term[1:]) :
+            return True
+    return False 
 def duplicate_link(lnk, val):
     """Mutates `lnk` such that if there is a linked list
     node that has a first equal to value, that node will
@@ -66,8 +67,14 @@ def duplicate_link(lnk, val):
     Link(2, Link(4, Link(6, Link(8))))
     """
     "*** YOUR CODE HERE ***"
-
-
+    if lnk is Link.empty :
+        return 
+    elif lnk.first == val :
+        remaining = lnk.rest
+        lnk.rest = Link(val,remaining) 
+        duplicate_link(remaining,val)
+    else :
+        duplicate_link(lnk.rest,val)
 def deep_map_mut(fn, lnk):
     """Mutates a deep link lnk by replacing each item found with the
     result of calling fn on the item.  Does NOT create new Links (so
