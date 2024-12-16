@@ -6,7 +6,7 @@ def gcd():
         a = b
         b = t
     return a
-def sort(arr):
+def selectsort(arr):
     for i in range(len(arr)-1):
         minindex = i
         for j in range(i+1,len(arr)):
