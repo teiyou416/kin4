@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+function form_push()
+{
+	var text=document.form1.field1.value;
+	alert(text);
+	}
+</script>
+<form name="form1">
+<input type="text"name="field1"value="test">
+<input type="button"value="push"onclick="form_push()">
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+function form_push()
+{
+	var name=document.form1.name.value;
+	var subject=document.form1.subject.value;
+	var reason=document.form1.reason.value;
+	alert("氏名:"+name+"\n科目:"+subject+"\n理由:"+reason);
+	}
+</script>
+<form name="form1">
+<h1>アンケート</h1>
+
+  <p>お名前:<br>
+   <input type="text"name="name"value=""size="10"/></p>
+ 
+   <p>一番難しい科目はなんだと思っているか？</p>
+   <input type="radio" name="subject"value="数学"/>数学
+   <input type="radio" name="subject"value="英語"/>英語
+   <input type="radio" name="subject"value="国語"/>国語
+   <p>理由は何ですか？<br>
+   <input type="text" name="reason" value=""size="60"/></p>
+   <p><input type="button"value="push"onclick="form_push()"></p>
+   </form>
+
+</body>
+</html>

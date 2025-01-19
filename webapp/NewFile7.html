@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script>
+ $(document).ready(function(){
+ $("#button").click(function(){
+ $("#target").show('slow');
+ });
+ });
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p><button id='button'>クリック</button></p>
+<div id="target" style="display:none;width:150px;height:150px;background-color:
+red;"></div>
+</body>
+</html>
