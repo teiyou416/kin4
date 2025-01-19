@@ -6,21 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <title>土木遺産詳細情報</title>
-    
- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCrmbqbbbMEq7oJnSQ6a-FsjkbFLJ1tfvM"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
- <script src="addressmaps.js"></script>
- <script>
-        $(document).ready(function(){
-            // 地図を描画するための処理(nameを基づいて検索)
-            var name = $(".name").text();
-            if(name){
-                drawMap(name);
-            } else {
-                alert("地図情報が見つかりません。");
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="map.css" />
+    <script src ="jav.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAo3d2dA0xoSHudzDhC0fNIfl6q0o-kACY&language=ja"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+ // <script>
+ //        $(document).ready(function(){
+ //            // 地図を描画するための処理(nameを基づいて検索)
+ //            var name = $(".name").text();
+ //            if(name){
+ //                drawMap(name);
+ //            } else {
+ //                alert("地図情報が見つかりません。");
+ //            }
+ //        });
+ //    </script>
 </head>
 <body>
     <div class="container">
@@ -57,6 +57,8 @@
             stmt.close();
             conn.close();
         %>
+        <div id="map"></div>
+        <script type="text/javascript" src="map.js"></script>
     </div>
 </body>
 </html>
