@@ -1,4 +1,5 @@
 def merge(lst1, lst2):
+
     """Merges two sorted lists.
 
     >>> merge([1, 3, 5], [2, 4, 6])

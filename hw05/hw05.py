@@ -51,6 +51,7 @@ def has_path(t, term):
         if has_path(b,term[1:]) :
             return True
     return False 
+    
 def duplicate_link(lnk, val):
     """Mutates `lnk` such that if there is a linked list
     node that has a first equal to value, that node will
