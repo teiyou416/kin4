@@ -1,0 +1,238 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath ,amsthm ,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+%\usepackage{ctex}
+\pagestyle{fancy}
+\fancyhead[R]{都21-139 teiyou}
+\title{gitへの紹介}
+\author{teiyou}
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    breaklines=true,
+    language=bash, 
+}
+%\newcommand{\incode}[1]{%
+%$    \begin{lstlisting}[escapechar=\#]
+%        #1  
+%    \end{lstlisting}%
+%}
+\begin{document}
+\maketitle
+\section{gitとは}
+ Gitとは、分散型バージョン管理システムの一つで、もともとLinuxのソースコードを効果的に管理するために開発される。
+ \newline Gitでは、ファイルの状態を好きなときに更新履歴として保存しておくことができます。そのため、一度編集したファイルを過去の状態に戻したり、編集箇所の差分を表示したりすることができる。
+\newline  また、古いファイルを元に編集したファイルで、他人の編集した最新ファイルを上書きしようとすると、サーバにアップロードした時に警告が出る。そのため、知らず知らずのうちに他人の編集内容を上書きしてしまうといった失敗は起こらない。
+\section{gitの操作 基本編}
+これからはgitの基本的な操作方法のinit,add,commit,diff,status,logを紹介する。
+リポジトリshow を例にしたい。
+今のshowの状態:
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show  
+$ ls
+README.md
+\end{lstlisting}
+\subsection{git init}
+init コマンドは新しいGitリポジトリを作成するために使用します。
+\begin{lstlisting}
+ls -a
+\end{lstlisting}
+今のshowの状態
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show  
+$ ls -a
+.  ..  .git  README.md
+\end{lstlisting}
+-a はすべてのファイルを現れる。隠れたファイルでも出る
+.git というファイルが出た。それはgitに関する情報を管理するファイルである。
+\subsection{git status}
+git status は、作業ディレクトリの状態とステージング エリアの状態を表示するコマンド
+\begin{lstlisting}
+git status
+\end{lstlisting}
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show  
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+\end{lstlisting}
+On branch master は現在のブランチはmaster(デフォルト)であることを表示する。
+No commits yet はまだコミットしてない。
+Untracked files は文字通りREADME.mdはまだ追跡されていない。
+\subsection{git add}
+git add {filename} はファイルをアップロードするコマンド。
+git add . はすべてのファイルをアップロード意味。
+\begin{lstlisting}
+git add README.md
+\end{lstlisting}
+を入力したら、
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show  
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   README.md
+\end{lstlisting}
+もう一回git statusすると、README.mdはもう追跡されるようになった。
+\subsection{git commit}
+git commitはインデックスにあるファイルの変更を、ローカルリポジトリに記録するコマンドである。つまり、リポジトリへ記録することをコミットと呼ぶわけである
+\begin{lstlisting}
+git commit -m '{your log}'
+\end{lstlisting}
+-m（あるいは--message）オプションを使用した場合、オプションの後に指定した文字列をコミットメッセージとする。
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show 
+$ git commit -m 'first'
+[master (root-commit) f6bb298] first
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+\end{lstlisting}
+これでもうgit使ってフアイルの保存を完了した。
+大体の流れるは
+\begin{lstlisting}
+|--git init
+|
+|--git add {filename}
+|
+|--git commit -m '{your log}'
+\end{lstlisting}
+の感じ。
+\subsection{git diff}
+diff は 2 つの入力データ・セットを取得してそれらの間の変更を出力する機能
+たとえば、自分はREADME.mdに「this is teiyou」を入力したら
+\begin{lstlisting}
+diff --git a/README.md b/README.md
+index 6b3a658..0efa13f 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,2 @@
+ This is a repo for git tutor
++this is teiyou
+(END)
+\end{lstlisting}
++{...}は新しい入れたコード。git diffで簡単でコードを比較する。
+\subsection{git log}
+git logとは、Gitのコミット履歴を参照する際に使うコマンド。
+\newline Git Bashなどのコマンドラインツールでgit logコマンドを実行すると、コミット履歴が新しいものから順に表示される。
+\begin{lstlisting}
+commit 6c707d0c535edb8b1bc708976773c46438885359 (HEAD -> master)
+Author: teiyoukandai <teiyou416@gmail.com>
+Date:   Wed May 7 18:27:40 2025 +0900
+
+    second
+
+commit f6bb298a0723a2e6db78cc520425ce87a23706b1
+Author: teiyoukandai <teiyou416@gmail.com>
+Date:   Wed May 7 18:15:51 2025 +0900
+
+    first
+(END)
+\end{lstlisting}
+ ごらんのとおり、このコマンドは各コミットについて SHA-1 チェックサム・作者の名前とメールアドレス・コミット日時・コミットメッセージを一覧表示する。
+\section{gitの操作　マスター編}
+git branch,checkout,merge,push,pullとリモートレポジトリの接続方法を紹介する。
+osaka gamba,sereso osaka を例として紹介する。
+\subsection{branchの管理}
+ブランチ(branch)は、1つのプロジェクトから分岐させることにより、プロジェクト本体に影響を与えずに開発を行える機能。
+\begin{lstlisting}
+git  branch 
+\end{lstlisting}
+を入力したら、
+\begin{lstlisting}
+*master
+\end{lstlisting}
+を表示する。
+\begin{lstlisting}
+git branch osakagamba
+\end{lstlisting}
+を入力、osakagambaという名前のbranchを作った。
+\begin{lstlisting}
+*master
+ osakagamba
+\end{lstlisting}
+＊は今のHEADはmasterである。
+\begin{lstlisting}
+git checkout osakagamba
+\end{lstlisting}
+\begin{lstlisting}
+master
+*osakagamba
+\end{lstlisting}
+と表示、今のHEADはosakagambaにあるの意味。
+いまはREADME.mdにthis is osakagamba を追加して、git操作したら、
+\begin{lstlisting}
+* commit 542843134c23d714316a1d8d0828160cfdcda1d0 (HEAD -> osakagamba)
+| Author: teiyoukandai <teiyou416@gmail.com>
+| Date:   Wed May 7 18:43:59 2025 +0900
+| 
+|     add oskagamba(入力ミス、すみません)
+| 
+* commit 6c707d0c535edb8b1bc708976773c46438885359 (master)
+| Author: teiyoukandai <teiyou416@gmail.com>
+| Date:   Wed May 7 18:27:40 2025 +0900
+| 
+|     second
+| 
+* commit f6bb298a0723a2e6db78cc520425ce87a23706b1
+  Author: teiyoukandai <teiyou416@gmail.com>
+  Date:   Wed May 7 18:15:51 2025 +0900
+  
+      first
+(END)
+\end{lstlisting}
+!注意：git log --all --graph --decorate: 有向非巡回グラフ（DAG）として履歴を可視化するを推奨
+HEAD->osakagamba のcommitがある。
+しかし、もしHEADをmasterに変更したら、
+\begin{lstlisting}
+This is a repo for git tutor
+this is teiyou
+\end{lstlisting}
+うん？先追加した「this is oskagamba」がいない!
+これは現在時点で,osakagambaのバージョンはmasterの先にあるから。
+この場合、mergeが必要となった。
+\subsection{git merge}
+\begin{lstlisting}
+git merge master osakagamba
+\end{lstlisting}
+\begin{lstlisting}
+y-cheng@client80:~/Downloads/show  
+$ git merge master osakagamba
+Updating 6c707d0..5428431
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+\end{lstlisting}
+もう一回README.mdを調べたら
+\begin{lstlisting}
+This is a repo for git tutor
+this is teiyou
+this is osakagamba
+\end{lstlisting}
+osakagambaがでました！
+\subsection{git push,pull,remote}
+次回から紹介する
+\begin{thebibliography}{999}
+	\bibitem{LaTeX}  奥村 晴彦,  黒木 裕介 , 「［改訂第9版］LaTeX美文書作成入門」, 技術評論社, 2023.
+	\bibitem{git} MIT,The Missing Semester of your CS Education,\newline \url{https://missing-semester-jp.github.io/2020/version-control} 
+\end{thebibliography}
+\end{document}
